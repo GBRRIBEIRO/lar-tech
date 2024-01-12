@@ -61,6 +61,7 @@ namespace lar_tech.API.Controllers
         {
             //Tries to add a new person to the DB, if succedes returns CreatedAtRoute else it returns BadRequest
             Person newPerson = new Person(personVM);
+            if (!newPerson.VerifyPhoneNumbers()) return BadRequest("Number provided is not a number");
             try
             {
                 await _repository.PostAsync(newPerson);

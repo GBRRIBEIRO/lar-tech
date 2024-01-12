@@ -36,5 +36,18 @@ namespace lar_tech.Domain.Models
         public DateTime BirthDate { get; set; }
         public bool IsActive { get; set; }
         public List<PhoneNumber> PhoneNumbers { get; set; } = new List<PhoneNumber>();
+
+        public bool VerifyPhoneNumbers()
+        {
+            foreach (var phoneNumber in PhoneNumbers)
+            {
+                foreach (char c in phoneNumber.Number)
+                {
+                    if (c < '0' || c > '9')
+                        return false;
+                }
+            }
+            return true;
+        }
     }
 }
