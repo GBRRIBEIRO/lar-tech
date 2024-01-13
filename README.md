@@ -15,5 +15,6 @@ Follow these steps to set up the database correctly:
 Follow these steps to run the API:
 * Go to the API folder: "lar-tech\lar-tech.API"
 * Run this command in the console **dotnet restore**
-* After run the command **dotnet run**
+* After, run the command **dotnet watch --launch-profile "https"**
+* Access and test the API entering **https://localhost:7044/swagger/index.html**
 * Done!
