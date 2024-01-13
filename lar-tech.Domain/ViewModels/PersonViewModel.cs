@@ -12,6 +12,6 @@ namespace lar_tech.Domain.ViewModels
         public string Name { get; set; } = "";
         public DateOnly BirthDate { get; set; }
         public bool IsActive { get; set; }
-        public List<string> PhoneNumbers { get; set; } = new List<string>();
+        public List<PhoneViewModel> PhoneNumbers { get; set; } = new List<PhoneViewModel>();
     }
 }

@@ -9,7 +9,7 @@ namespace lar_tech.Data.Database
         public DbSet<PhoneNumber> PhoneNumbers { get; set; }
         public DbSet<Person> People { get; set; }
         private IConfiguration _configuration { get; set; }
-        public ApplicationDbContext(DbContextOptions options, IConfiguration configuration) : base(options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IConfiguration configuration) : base(options)
         {
             _configuration = configuration;
         }

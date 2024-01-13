@@ -1,7 +1,7 @@
 ﻿using lar_tech.Domain.Interfaces;
 using lar_tech.Domain.Models;
 
-namespace lar_tech.Data.Handlers
+namespace lar_tech.Services.Handlers
 {
     public static class PaginationHandler
     {

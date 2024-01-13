@@ -27,7 +27,7 @@ namespace lar_tech.Domain.Models
             Name = viewModel.Name;
             BirthDate = viewModel.BirthDate.ToDateTime(TimeOnly.MinValue);
             IsActive = viewModel.IsActive;
-            PhoneNumbers = viewModel.PhoneNumbers.Select(number => new PhoneNumber(this.Id, number)).ToList();
+            PhoneNumbers = viewModel.PhoneNumbers.Select(number => new PhoneNumber(this.Id, number.PhoneType, number.PhoneNumber)).ToList();
         }
 
 

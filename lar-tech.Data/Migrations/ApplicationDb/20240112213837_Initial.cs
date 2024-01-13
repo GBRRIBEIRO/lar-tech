@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace lar_tech.Data.Migrations
+namespace lar_tech.Data.Migrations.ApplicationDb
 {
     /// <inheritdoc />
     public partial class Initial : Migration
@@ -31,7 +31,8 @@ namespace lar_tech.Data.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     PersonId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Number = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: false)
+                    PhoneType = table.Column<int>(type: "int", nullable: false),
+                    Number = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -1,8 +1,10 @@
 ﻿using lar_tech.Data.Database;
 using lar_tech.Data.Repositories;
 using lar_tech.Domain.Filters;
+using lar_tech.Domain.Interfaces;
 using lar_tech.Domain.Models;
 using lar_tech.Domain.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -16,12 +18,12 @@ namespace lar_tech.API.Controllers
         //Using a personalized repository
         private PersonRelationalRepository<Person> _repository;
 
-        public PersonController(ApplicationDbContext dbContext)
+        public PersonController(IUnitOfWork unitOfWork)
         {
-            _repository = new PersonRelationalRepository<Person>(dbContext);
+            _repository = unitOfWork.PersonRepository;
         }
 
-
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<List<Person>>> GetPeopleAsync([FromQuery] PersonFilterRequest? personFilter)
         {
@@ -38,6 +40,7 @@ namespace lar_tech.API.Controllers
             return Ok(result);
         }
 
+        [Authorize]
         [HttpGet("{id}", Name = "GetById")]
         public async Task<ActionResult<Person>> GetPersonById([FromRoute] string id)
         {
@@ -47,6 +50,7 @@ namespace lar_tech.API.Controllers
             return Ok(result);
         }
 
+        [Authorize]
         //Uses a custom PaginatedRequest that have the person filter
         [HttpGet("paginated")]
         public async Task<ActionResult<Person>> GetPeoplePaginated([FromQuery] PaginatedPersonRequest paginatedRequest)
@@ -56,6 +60,7 @@ namespace lar_tech.API.Controllers
             return Ok(result);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult> AddPerson([FromBody] PersonViewModel personVM)
         {
@@ -74,6 +79,7 @@ namespace lar_tech.API.Controllers
             return CreatedAtRoute("GetById", new { id = newPerson.Id }, newPerson);
         }
 
+        [Authorize]
         [HttpPut]
         public async Task<ActionResult> UpdatePerson([FromBody] Person person)
         {
@@ -90,6 +96,25 @@ namespace lar_tech.API.Controllers
             return Ok();
         }
 
+        [Authorize]
+        [HttpPost("toggle/{id}")]
+        public async Task<ActionResult> ToggleActiveStatus([FromRoute] string id)
+        {
+            //Get person by id
+            var person = await _repository.GetByIdAsync(id);
+            if (person == null) return BadRequest("Incorrect Id!");
+
+            //Toggle active status
+            if (person.IsActive) person.IsActive = false;
+            else person.IsActive = true;
+
+            //Save changes
+            await _repository.PutAsync(person);
+            return Ok();
+
+        }
+
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
         public async Task<ActionResult> DeletePerson([FromBody] Person person)
         {
@@ -106,6 +131,7 @@ namespace lar_tech.API.Controllers
             return Ok();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeletePersonById([FromRoute] string id)
         {

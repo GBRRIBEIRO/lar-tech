@@ -1,6 +1,6 @@
 ﻿using lar_tech.Domain.Enums;
 
-namespace lar_tech.Data.Handlers
+namespace lar_tech.Services.Handlers
 {
     public static class OrderingHandler
     {

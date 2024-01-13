@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lar-tech.Domain", "lar-tech
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lar-tech.Data", "lar-tech.Data\lar-tech.Data.csproj", "{71EBA49D-6203-40AA-9A29-0D099ED6F762}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lar-tech.Services", "lar-tech.Services\lar-tech.Services.csproj", "{846D7C8C-1C6B-4ED7-B8FE-07D533994F22}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{71EBA49D-6203-40AA-9A29-0D099ED6F762}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71EBA49D-6203-40AA-9A29-0D099ED6F762}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71EBA49D-6203-40AA-9A29-0D099ED6F762}.Release|Any CPU.Build.0 = Release|Any CPU
+		{846D7C8C-1C6B-4ED7-B8FE-07D533994F22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{846D7C8C-1C6B-4ED7-B8FE-07D533994F22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{846D7C8C-1C6B-4ED7-B8FE-07D533994F22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{846D7C8C-1C6B-4ED7-B8FE-07D533994F22}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

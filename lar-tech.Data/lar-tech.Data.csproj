@@ -22,6 +22,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\lar-tech.Domain\lar-tech.Domain.csproj" />
+		<ProjectReference Include="..\lar-tech.Services\lar-tech.Services.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -1,5 +1,5 @@
-﻿using lar_tech.Data.Database;
-using lar_tech.Data.Handlers;
+﻿using lar_tech.Services.Handlers;
+using lar_tech.Data.Database;
 using lar_tech.Domain.Interfaces;
 using lar_tech.Domain.Models;
 using Microsoft.EntityFrameworkCore;
