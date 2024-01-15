@@ -14,7 +14,7 @@ namespace lar_tech.Services.Handlers
 
             if (personFilter.Date != null) query = query.Where(p => p.BirthDate.Date == personFilter.Date.Value.ToDateTime(TimeOnly.MinValue));
 
-            if (personFilter.PhoneNumber != null) query = query.Where(p => p.PhoneNumbers.Any(phone => phone.Number.Contains(personFilter.PhoneNumber)));
+            if (personFilter.PhoneNumber != null) query = query.Where(p => p.PhoneNumbers.Any(phone => phone.Number == personFilter.PhoneNumber));
 
             return query;
         }

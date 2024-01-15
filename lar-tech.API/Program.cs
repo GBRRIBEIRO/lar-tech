@@ -1,16 +1,13 @@
 
-using lar_tech.Data.Database;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
-using lar_tech.Domain.Identity;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using lar_tech.API.Extensions;
-using lar_tech.Services.Identity;
-using Microsoft.OpenApi.Models;
-using lar_tech.Domain.Interfaces;
+using lar_tech.Data.Database;
 using lar_tech.Data.Repositories;
+using lar_tech.Domain.Identity;
+using lar_tech.Domain.Interfaces;
+using lar_tech.Services.Identity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 namespace lar_tech.API
 {

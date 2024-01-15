@@ -1,13 +1,10 @@
-﻿using lar_tech.Data.Database;
-using lar_tech.Data.Repositories;
+﻿using lar_tech.Data.Repositories;
 using lar_tech.Domain.Filters;
 using lar_tech.Domain.Interfaces;
 using lar_tech.Domain.Models;
 using lar_tech.Domain.ViewModels;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 
 namespace lar_tech.API.Controllers
 {
@@ -51,6 +48,21 @@ namespace lar_tech.API.Controllers
         }
 
         [Authorize]
+        [HttpGet("{cpf}")]
+        public async Task<ActionResult<Person>> GetPersonByCpf([FromRoute] string cpf)
+        {
+            //Get by the id and if do not find returns NotFound, else return Ok and the object
+            long cpfnumbers = 0;
+            var success = long.TryParse(cpf, out cpfnumbers);
+
+            if (!success) return BadRequest("Not a number!");
+
+            var result = await _repository.GetByCpfAsync(cpfnumbers);
+            if (result == null) return NotFound();
+            return Ok(result);
+        }
+
+        [Authorize]
         //Uses a custom PaginatedRequest that have the person filter
         [HttpGet("paginated")]
         public async Task<ActionResult<Person>> GetPeoplePaginated([FromQuery] PaginatedPersonRequest paginatedRequest)
@@ -65,8 +77,14 @@ namespace lar_tech.API.Controllers
         public async Task<ActionResult> AddPerson([FromBody] PersonViewModel personVM)
         {
             //Tries to add a new person to the DB, if succedes returns CreatedAtRoute else it returns BadRequest
-            Person newPerson = new Person(personVM);
-            if (!newPerson.VerifyPhoneNumbers()) return BadRequest("Number provided is not a number");
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            //Validates the cpf and creates the person object
+            if (personVM.PhoneNumbers.Any(pn => !pn.IsValid)) return BadRequest("Incorrect phone formats");
+            Person? newPerson = Person.ValidadeAndCreateObject(personVM);
+
+            if (newPerson == null) return BadRequest("Cpf invalid");
+
             try
             {
                 await _repository.PostAsync(newPerson);

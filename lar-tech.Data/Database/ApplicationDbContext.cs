@@ -18,6 +18,9 @@ namespace lar_tech.Data.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Person>()
+                .HasAlternateKey(p => p.Cpf);
+
+            modelBuilder.Entity<Person>()
                 .HasMany(p => p.PhoneNumbers)
                 .WithOne()
                 .HasForeignKey(p => p.PersonId)

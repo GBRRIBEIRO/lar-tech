@@ -12,8 +12,8 @@ using lar_tech.Data.Database;
 namespace lar_tech.Data.Migrations.ApplicationDb
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240112213837_Initial")]
-    partial class Initial
+    [Migration("20240115140744_NumberCorrection")]
+    partial class NumberCorrection
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,6 +33,9 @@ namespace lar_tech.Data.Migrations.ApplicationDb
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<long>("Cpf")
+                        .HasColumnType("bigint");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
@@ -42,6 +45,8 @@ namespace lar_tech.Data.Migrations.ApplicationDb
 
                     b.HasKey("Id");
 
+                    b.HasAlternateKey("Cpf");
+
                     b.ToTable("People");
                 });
 
@@ -50,9 +55,8 @@ namespace lar_tech.Data.Migrations.ApplicationDb
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Number")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<long>("Number")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("PersonId")
                         .IsRequired()

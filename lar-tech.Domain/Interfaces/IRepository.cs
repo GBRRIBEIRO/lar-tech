@@ -1,10 +1,4 @@
-﻿using lar_tech.Domain.Filters;
-using lar_tech.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using lar_tech.Domain.Models;
 
 namespace lar_tech.Domain.Interfaces
 {

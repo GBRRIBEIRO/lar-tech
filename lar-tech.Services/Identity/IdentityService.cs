@@ -2,7 +2,6 @@
 using lar_tech.Domain.Models;
 using lar_tech.Domain.ViewModels;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;

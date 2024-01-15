@@ -1,14 +1,10 @@
-﻿using lar_tech.Data.Database;
-using lar_tech.Data.Repositories;
-using lar_tech.Domain.Identity;
+﻿using lar_tech.Domain.Identity;
 using lar_tech.Domain.Interfaces;
 using lar_tech.Domain.Models;
 using lar_tech.Domain.ViewModels;
 using lar_tech.Services.Identity;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -38,16 +34,24 @@ namespace lar_tech.API.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpGet]
-        public async Task<ActionResult<List<ApplicationUser>>> GetAllUsers()
+        public async Task<ActionResult<List<UserRoles>>> GetAllUsers()
         {
             var result = await _userManager.Users.ToListAsync();
             if (result.Count == 0) return NoContent();
-            return Ok(result);
+
+            var userRoles = new List<UserRoles>();
+            foreach (var user in result)
+            {
+                var roles = await _userManager.GetRolesAsync(user);
+                userRoles.Add(new UserRoles { ApplicationUser = user, Roles = roles.ToList() });
+            }
+
+            return Ok(userRoles);
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpDelete]
-        public async Task<ActionResult> DeleteUserByEmail([FromBody] string email)
+        [HttpDelete("{email}")]
+        public async Task<ActionResult> DeleteUserByEmail([FromRoute] string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
             if (user == null) return NoContent();
@@ -65,8 +69,8 @@ namespace lar_tech.API.Controllers
 
         //Only admin can promote other user to admin
         [Authorize(Roles = "Admin")]
-        [HttpPost("promote")]
-        public async Task<ActionResult> PromoteToAdmin([FromBody] string email)
+        [HttpPost("promote/{email}")]
+        public async Task<ActionResult> PromoteToAdmin([FromRoute] string email)
         {
             //Promote user
             var success = await _identityService.PromoteUserByEmail(email);
@@ -76,8 +80,8 @@ namespace lar_tech.API.Controllers
 
         //Only admin can remove an admin
         [Authorize(Roles = "Admin")]
-        [HttpPost("removeadmin")]
-        public async Task<ActionResult> RemoveAdmin([FromBody] string email)
+        [HttpPost("removeadmin/{email}")]
+        public async Task<ActionResult> RemoveAdmin([FromRoute] string email)
         {
             //Promote user
             var success = await _identityService.RemoveAdminByEmail(email);

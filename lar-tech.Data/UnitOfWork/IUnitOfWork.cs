@@ -1,7 +1,7 @@
-﻿using lar_tech.Domain.Identity;
+﻿using lar_tech.Data.Repositories;
+using lar_tech.Domain.Identity;
 using lar_tech.Domain.Models;
 using Microsoft.AspNetCore.Identity;
-using lar_tech.Data.Repositories;
 
 namespace lar_tech.Domain.Interfaces
 {

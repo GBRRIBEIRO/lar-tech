@@ -1,13 +1,4 @@
 ﻿using lar_tech.Domain.Enums;
-using lar_tech.Domain.Interfaces;
-using lar_tech.Domain.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace lar_tech.Domain.Models
 {
@@ -17,7 +8,7 @@ namespace lar_tech.Domain.Models
         {
 
         }
-        public PhoneNumber(string personId, PhoneType type, string number)
+        public PhoneNumber(string personId, PhoneType type, long number)
         {
             Id = Guid.NewGuid().ToString();
             PersonId = personId;
@@ -25,9 +16,10 @@ namespace lar_tech.Domain.Models
             Number = number;
         }
 
-        public string Id { get; set; }
+        public string Id { get; set; } = Guid.NewGuid().ToString();
         public string PersonId { get; set; }
         public PhoneType PhoneType { get; set; }
-        public string Number { get; set; }
+        public long Number { get; set; }
+
     }
 }

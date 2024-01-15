@@ -1,9 +1,7 @@
 ﻿using lar_tech.Data.Database;
-using lar_tech.Domain.Enums;
 using lar_tech.Domain.Filters;
-using lar_tech.Services.Handlers;
-using lar_tech.Domain.Interfaces;
 using lar_tech.Domain.Models;
+using lar_tech.Services.Handlers;
 using Microsoft.EntityFrameworkCore;
 
 namespace lar_tech.Data.Repositories
@@ -12,6 +10,11 @@ namespace lar_tech.Data.Repositories
     {
         public PersonRelationalRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
+        }
+
+        public async Task<T?> GetByCpfAsync(long cpf)
+        {
+            return await _dbSet.Where(p => p.Cpf == cpf).FirstOrDefaultAsync();
         }
 
         public async Task<List<T>> GetAllFiltered(PersonFilterRequest personFilter)

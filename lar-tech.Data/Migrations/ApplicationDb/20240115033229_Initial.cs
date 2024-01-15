@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -16,6 +15,7 @@ namespace lar_tech.Data.Migrations.ApplicationDb
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Cpf = table.Column<long>(type: "bigint", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false)
@@ -23,6 +23,7 @@ namespace lar_tech.Data.Migrations.ApplicationDb
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_People", x => x.Id);
+                    table.UniqueConstraint("AK_People_Cpf", x => x.Cpf);
                 });
 
             migrationBuilder.CreateTable(

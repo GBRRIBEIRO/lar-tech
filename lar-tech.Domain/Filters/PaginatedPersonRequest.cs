@@ -1,10 +1,5 @@
 ﻿using lar_tech.Domain.Enums;
 using lar_tech.Domain.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace lar_tech.Domain.Filters
 {
@@ -28,7 +23,7 @@ namespace lar_tech.Domain.Filters
                 Name = this.Name,
                 Date = this.Date,
                 IsActive = this.IsActive,
-                PhoneNumber = this.PhoneNumber,
+                PhoneNumber = long.Parse(this.PhoneNumber),
                 Order = this.Order,
                 OrderBy = this.OrderBy,
             };
