@@ -18,3 +18,8 @@ Follow these steps to run the API:
 * After, run the command **dotnet watch --launch-profile "https"**
 * Access and test the API entering **https://localhost:7044/swagger/index.html**
 * Done!
+
+
+### Super Admin Login (Seeded)
+Login: superadmin@admin.com
+Password: Admin@2024
